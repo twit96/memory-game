@@ -1,5 +1,9 @@
 // Configure Puzzle -----------------------------------------------------------
 
+// audio
+var flip_sound = document.getElementById("flip_sound");
+var match_sound = document.getElementById("match_sound");
+
 // store 2 copies of each image (made by me in Windows Paint3D)
 var images = [
   "check",
@@ -19,7 +23,7 @@ var images = [
   "x",
   "x"
 ];
-var shuffled = [];  // shuffled images
+
 
 function config_puzzle() {
   /*
@@ -29,6 +33,7 @@ function config_puzzle() {
   */
 
   // Shuffle Images
+  var shuffled = [];  // shuffled images
   var copy = images.slice(0);
 
   for (i=0; i<images.length; i++) {
@@ -57,6 +62,25 @@ function config_puzzle() {
 }
 
 
+function restart() {
+  // reset turns
+  turns = 0;
+  $("#turns").text(String(turns));
+  // reset board elements
+  for (i=0; i<4; i++) {
+    for (j=0; j<4; j++) {
+      $("#b" + String(i) + String(j)).removeClass();
+    }
+  }
+  // generate new board
+  config_puzzle();
+}
+
+$('header h1').bind('click', function() {
+  restart();
+});
+
+
 // Puzzle Functionality -------------------------------------------------------
 var chosen = [];  // array to store class names of chosen buttons
 var first;
@@ -73,6 +97,7 @@ $("#board").find("button").bind('click', function(e) {
 
   // check if chosen array is full
   if (chosen.length < 2) {
+    flip_sound.play();
 
     // get this button's class (image name)
     var this_class = $(this).attr('class').split(/\s+/)[0];
@@ -100,10 +125,12 @@ $("#board").find("button").bind('click', function(e) {
     }).fadeTo('fast', 1);
 
     // Delay then reset
-    $(this).delay(1500).fadeTo("fast", 0, function() {
+    $(this).delay(1000).fadeTo("fast", 0, function() {
 
       // if match exists
       if (is_pair || has_match) {
+        match_sound.play();
+
         $(this).unbind();  // remove click event
         has_match = true;  // reset has match
 
@@ -111,6 +138,7 @@ $("#board").find("button").bind('click', function(e) {
 
       // if no match
       } else {
+        flip_sound.play();
         $(this).css("background-image", "");
       }
 

@@ -1,6 +1,7 @@
 /* HTML Config ------------------------------------------------------------- */
 :root {
   --main-color: #fff;
+  --sub-color: #555;
   --accent-color: #121269;
 }
 
@@ -26,6 +27,9 @@ body {
   background-repeat: no-repeat;
 }
 
+a { text-decoration: none; }
+a:hover { text-decoration: underline; }
+
 header {
   position: fixed;
   right: 0;
@@ -39,6 +43,26 @@ header {
   box-shadow: 0 -0.15em 0.5em black inset;
 }
 
+header h1 {
+  /* prevent random text selection onclick */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+header h1 span {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: normal;
+  color: var(--sub-color);
+}
+
+header h1:hover span {
+  color: var(--main-color);
+}
+
 footer {
   position: fixed;
   right: 0;
@@ -49,6 +73,12 @@ footer {
   color: var(--main-color);
   padding: 0.5em;
 }
+
+footer div, footer a {
+  color: var(--sub-color);
+  font-size: 0.75rem;
+}
+
 
 /* Game Board -------------------------------------------------------------- */
 table {
