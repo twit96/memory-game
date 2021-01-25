@@ -1,0 +1,102 @@
+/* HTML Config ------------------------------------------------------------- */
+:root {
+  --main-color: #fff;
+  --accent-color: #121269;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  /* position children */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  /* set background image */
+  background-image: url("img/background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+header {
+  position: fixed;
+  right: 0;
+  top: 0;
+  left: 0;
+  padding: 0.75em;
+  width: 100%;
+  text-align: center;
+  background-color: var(--accent-color);
+  color: var(--main-color);
+  box-shadow: 0 -0.15em 0.5em black inset;
+}
+
+footer {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+  background-color: var(--accent-color);
+  color: var(--main-color);
+  padding: 0.5em;
+}
+
+/* Game Board -------------------------------------------------------------- */
+table {
+  height: 100vh;
+  max-width: 960px;
+  margin: 1em auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  /* sizing and positioning */
+  width: min(17.5vw, 12.5vh);
+  height: min(17.5vw, 12.5vh);
+  max-width: 150px;
+  max-height: 150px;
+  margin: min(1vw, 5px);
+  padding: min(2vw, 10px);
+  /* style */
+  background-color: var(--main-color);
+  border-radius: 15px;
+  border: 0;
+  box-shadow: 0 0 0.75em black;
+  /* background image positioning */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-origin: content-box;
+  /* animation */
+  transition: 0.25s transform linear;
+}
+
+button:hover {
+  border: 3px solid black;
+}
+
+button:focus {
+  outline: none;
+  border: 3px solid black;
+}
+
+button.matched {
+  border: 3px solid green;
+  animation: 0.25s zoom-in-out linear;
+}
+
+@keyframes zoom-in-out {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.5); }
+}
