@@ -62,25 +62,6 @@ function config_puzzle() {
 }
 
 
-function restart() {
-  // reset turns
-  turns = 0;
-  $("#turns").text(String(turns));
-  // reset board elements
-  for (i=0; i<4; i++) {
-    for (j=0; j<4; j++) {
-      $("#b" + String(i) + String(j)).removeClass();
-    }
-  }
-  // generate new board
-  config_puzzle();
-}
-
-$('header h1').bind('click', function() {
-  restart();
-});
-
-
 // Puzzle Functionality -------------------------------------------------------
 var chosen = [];  // array to store class names of chosen buttons
 var first;
