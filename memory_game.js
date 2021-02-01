@@ -5,6 +5,10 @@ var flip_sound = document.getElementById("flip_sound");
 var match_sound = document.getElementById("match_sound");
 var win_sound = document.getElementById("win_sound");
 
+// dynamic elements
+var board_cover = document.getElementById('cover');
+var turns_text = document.getElementById("turns");
+
 // store 2 copies of each image (made by me in Windows Paint3D)
 var images = [
   "check",
@@ -50,17 +54,34 @@ function config_puzzle() {
   for (i=0; i<4; i++) {  // rows
     for (j=0; j<4; j++) {  // columns
 
+      // get this element
+      var curr_id = "b" + String(i) + String(j);
+      var curr_elem = document.getElementById(curr_id);
+
+      // reset anything set in previous game
+      curr_elem.classList = '';
+      curr_elem.style.backgroundImage = "";
+
       // add image names as class name to each button
-      $("#b" + String(i) + String(j)).addClass(shuffled[s_idx]);
+      curr_elem.classList.add(shuffled[s_idx]);
+
+      // add click event handler
+      curr_elem.setAttribute('onclick', 'flipCard(this)');
 
       // for debugging - display all button images
-      // $("#b" + String(i) + String(j)).css("background-image", "url(img/" + shuffled[s_idx] + ".png)");
+      // curr_elem.style.backgroundImage = "url(img/" + shuffled[s_idx] + ".png)";
 
       // add to shuffled array index
       s_idx++;
     }
   }
 }
+
+// initial call on page load
+config_puzzle();
+
+// call on header click
+document.querySelector('header div').setAttribute('onclick', 'config_puzzle()');
 
 
 // Puzzle Functionality -------------------------------------------------------
@@ -72,55 +93,55 @@ var has_match = false;  // store if player has match
 var lock_board = false;
 
 
-// Button Click Event
-$("#board").find("button").bind('click', function(e) {
+function flipCard(card) {
 
-  if (lock_board) return;
+  if (lock_board) return;  // return if two cards already flipped
 
-  // check if chosen array is full
   if (chosen.length < 2) {
-    flip_sound.play();
 
-    // get this button's class (image name)
-    var this_class = $(this).attr('class').split(/\s+/)[0];
-    if (this == first) return;  // return if already clicked
+    // check if card already clicked
+    if (card == first) return;
+    first = card;
+
+    flip_sound.play();
 
     // add to turns count
     turns++;
-    $("#turns").text(String(turns));
+    turns_text.innerHTML = turns;
 
     // add class name to chosen array
-    chosen.push(this_class);
-    first = this;
+    var c_class = card.className;
+    chosen.push(c_class);
     if (chosen.length == 2) {
       lock_board = true;
-      document.getElementById('cover').style.display = 'block';
+      board_cover.style.display = 'block';
     }
 
     // check for pair
-    check_pair();
-
+    if ((chosen.length == 2) && (chosen[0] === chosen[1])) {
+      has_match = true;
+    } else {
+      has_match = false;
+    }
     // store if this button is part of a pair
     if (has_match) { var is_pair = true; }
     else { var is_pair = false; }
 
     // Reveal Background Image
-    $(this).fadeTo('fast', 0, function() {
-      $(this).css("background-image", "url(img/" + this_class + ".png)");
+    $(card).fadeTo('fast', 0, function() {
+      $(card).css("background-image", "url(img/" + c_class + ".png)");
     }).fadeTo('fast', 1);
 
     // Delay then reset
-    $(this).delay(1000).fadeTo("fast", 0, function() {
+    $(card).delay(1000).fadeTo("fast", 0, function() {
 
       // if match exists
       if (is_pair || has_match) {
         match_sound.play();
-
-        $(this).unbind();  // remove click event
+        card.setAttribute('onclick', '');  // remove click event
         has_match = true;  // reset has match
-
-        $(this).addClass('matched');
-        check_win();
+        card.classList.add('matched');  // restyle as matched card
+        check_win();  // check if won game
 
       // if no match
       } else {
@@ -129,7 +150,7 @@ $("#board").find("button").bind('click', function(e) {
       }
 
       // remove from chosen array
-      const index = chosen.indexOf(this_class);
+      const index = chosen.indexOf(c_class);
       chosen.splice(index, 1);
       first = null;
 
@@ -141,30 +162,13 @@ $("#board").find("button").bind('click', function(e) {
 
     }).fadeTo('fast', 1);
   }
-});
-
-
-function check_pair() {
-  /*
-  function to check for a match. called after button click.
-  */
-  if ((chosen.length == 2) && (chosen[0] === chosen[1])) {
-    has_match = true;
-  } else {
-    has_match = false;
-  }
 }
-
 
 function check_win() {
   matches++;
-  // console.log(matches);
+  console.log(matches);
   if (matches == 16) {
     win_sound.play();
-    // console.log('won game');
-    // reset game
+    console.log('won game');
   }
 }
-
-
-config_puzzle();

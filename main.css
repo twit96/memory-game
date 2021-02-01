@@ -44,6 +44,11 @@ header {
   box-shadow: 0 -0.15em 0.5em black inset;
 }
 
+header div {
+  color: var(--sub-color);
+  font-size: 0.75rem;
+}
+
 footer {
   position: fixed;
   right: 0;
