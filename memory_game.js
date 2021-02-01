@@ -118,10 +118,6 @@ $("#board").find("button").bind('click', function(e) {
         $(this).addClass('matched');
         check_win();
 
-        matches++;
-        checkWin();
-        // console.log(matches);
-
       // if no match
       } else {
         flip_sound.play();
@@ -154,18 +150,14 @@ function check_pair() {
   }
 }
 
-function checkWin() {
-  if (matches == 16) {
-    console.log('won game');
-    // reset game
-  }
-}
-
 
 function check_win() {
   matches++;
+  // console.log(matches);
   if (matches == 16) {
     win_sound.play();
+    // console.log('won game');
+    // reset game
   }
 }
 
