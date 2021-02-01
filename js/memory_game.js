@@ -180,7 +180,9 @@ function flipCard(card) {
 function checkWin() {
   matches++;
   if (matches == 16) {
-    win_sound.play();
-    confetti.start(3000);
+    setTimeout(function() {
+      win_sound.play();
+      confetti.start(3000);
+    }, 1100);
   }
 }
