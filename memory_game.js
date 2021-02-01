@@ -69,10 +69,13 @@ var first;
 var turns = 0;  // number of tries
 var matches = 0;  // track number of matches
 var has_match = false;  // store if player has match
+var lock_board = false;
 
 
 // Button Click Event
 $("#board").find("button").bind('click', function(e) {
+
+  if (lock_board) return;
 
   // check if chosen array is full
   if (chosen.length < 2) {
@@ -90,6 +93,7 @@ $("#board").find("button").bind('click', function(e) {
     chosen.push(this_class);
     first = this;
     if (chosen.length == 2) {
+      lock_board = true;
       document.getElementById('cover').style.display = 'block';
     }
 
@@ -131,6 +135,7 @@ $("#board").find("button").bind('click', function(e) {
 
       // uncover board
       if (chosen.length == 0) {
+        lock_board = false;
         document.getElementById('cover').style.display = 'none';
       }
 
