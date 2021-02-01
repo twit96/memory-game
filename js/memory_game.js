@@ -150,11 +150,20 @@ function flipCard(card) {
 
       // if match exists
       if (is_pair || has_match) {
+
+        // check if won game
+        matches++;
+        if (matches == 16) {
+          setTimeout(function() {
+            win_sound.play();
+            confetti.start(3000);
+          }, 1100);
+        }
+
         match_sound.play();
         card.setAttribute('onclick', '');  // remove click event
         has_match = true;  // reset has match
         card.classList.add('matched');  // restyle as matched card
-        checkWin();  // check if won game
 
       // if no match
       } else {
@@ -174,15 +183,5 @@ function flipCard(card) {
       }
 
     }).fadeTo('fast', 1);
-  }
-}
-
-function checkWin() {
-  matches++;
-  if (matches == 16) {
-    setTimeout(function() {
-      win_sound.play();
-      confetti.start(3000);
-    }, 1100);
   }
 }
