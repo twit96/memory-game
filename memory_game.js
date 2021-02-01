@@ -3,6 +3,7 @@
 // audio
 var flip_sound = document.getElementById("flip_sound");
 var match_sound = document.getElementById("match_sound");
+var win_sound = document.getElementById("win_sound");
 
 // store 2 copies of each image (made by me in Windows Paint3D)
 var images = [
@@ -66,7 +67,7 @@ function config_puzzle() {
 var chosen = [];  // array to store class names of chosen buttons
 var first;
 var turns = 0;  // number of tries
-var matches = 0;
+var matches = 0;  // track number of matches
 var has_match = false;  // store if player has match
 
 
@@ -115,6 +116,7 @@ $("#board").find("button").bind('click', function(e) {
         has_match = true;  // reset has match
 
         $(this).addClass('matched');
+        check_win();
 
         matches++;
         checkWin();
@@ -156,6 +158,14 @@ function checkWin() {
   if (matches == 16) {
     console.log('won game');
     // reset game
+  }
+}
+
+
+function check_win() {
+  matches++;
+  if (matches == 16) {
+    win_sound.play();
   }
 }
 

@@ -2,3 +2,4 @@ Sounds from Zapsplat.com.
 
 match_sound: zapsplat_multimedia_game_sound_coins_collect_several_at_once_002_40813
 flip_sound: zapsplat_foley_compass_click_close_004_30196
+win_sound: little_robot_sound_factory_Jingle_Win_Synth_05
