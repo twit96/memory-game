@@ -46,7 +46,13 @@
     </div>
     <script>
       window.onload = function(e) {
-        document.getElementById('loading').style.opacity = "0";
+        setTimeout(function() {
+          document.getElementById('loading').style.opacity = "0";
+        }, 1000);
+        setTimeout(function() {
+          document.getElementById('loading').style.display = "none";
+        }, 1500);
+        //
       }
     </script>
 

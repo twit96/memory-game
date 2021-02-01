@@ -35,7 +35,7 @@ a:hover { text-decoration: underline; }
   position: absolute;
   left: 0; top: 0; right: 0; bottom: 0;
   background-color: #9c7c63;
-  transition: 1s opacity linear;
+  transition: 0.25s opacity linear;
   /* children */
   display: flex;
   align-items: center;
