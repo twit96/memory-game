@@ -154,10 +154,8 @@ function flipCard(card) {
         // check if won game
         matches++;
         if (matches == 16) {
-          setTimeout(function() {
-            win_sound.play();
-            confetti.start(3000);
-          }, 1100);
+          win_sound.play();
+          confetti.start(3000);
         }
 
         match_sound.play();
