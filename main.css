@@ -30,6 +30,27 @@ body {
 a { text-decoration: none; }
 a:hover { text-decoration: underline; }
 
+#loading {
+  /* self */
+  position: absolute;
+  left: 0; top: 0; right: 0; bottom: 0;
+  background-color: #9c7c63;
+  transition: 1s opacity linear;
+  /* children */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+
+}
+
+#loading svg {
+  width: min(50vmin, 250px);
+  height: min(50vmin, 250px);
+  stroke: var(--main-color);
+  fill: var(--main-color);
+}
+
 header {
   position: fixed;
   right: 0;
@@ -58,6 +79,7 @@ footer {
   text-align: center;
   background-color: var(--accent-color);
   color: var(--main-color);
+  box-shadow: 0 0.15em 0.5em black inset;
   padding: 0.5em;
 }
 

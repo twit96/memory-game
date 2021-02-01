@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="img/check.png" />
-    <link rel="stylesheet" type="text/css" href="main.css" />
+    <link rel="stylesheet" type="text/css" href="main.css?v=1.0" />
     <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="js/confetti/confetti.min.js"></script>
@@ -14,6 +14,42 @@
   </head>
 
   <body>
+    <div id='loading'>
+      <svg viewBox="0 0 100 100">
+        <circle cx="25" cy="50" r="5">
+          <animateTransform
+            attributeName="transform"
+            dur="1s"
+            type="translate"
+            values="0 10 ; 0 -10; 0 10"
+            repeatCount="indefinite" />
+        </circle>
+        <circle cx="50" cy="50" r="5">
+          <animateTransform
+            attributeName="transform"
+            dur="1s"
+            type="translate"
+            values="0 10 ; 0 -10; 0 10"
+            repeatCount="indefinite"
+            begin="0.25" />
+        </circle>
+        <circle cx="75" cy="50" r="5">
+          <animateTransform
+            attributeName="transform"
+            dur="1s"
+            type="translate"
+            values="0 10 ; 0 -10; 0 10"
+            repeatCount="indefinite"
+            begin="0.5" />
+        </circle>
+      </svg>
+    </div>
+    <script>
+      window.onload = function(e) {
+        document.getElementById('loading').style.opacity = "0";
+      }
+    </script>
+
     <audio id="flip_sound" src="audio/flip_sound.mp3"></audio>
     <audio id="match_sound" src="audio/match_sound.mp3"></audio>
     <audio id="win_sound" src="audio/win_sound.mp3"></audio>
