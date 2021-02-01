@@ -66,15 +66,12 @@ function config_puzzle() {
 var chosen = [];  // array to store class names of chosen buttons
 var first;
 var turns = 0;  // number of tries
+var matches = 0;
 var has_match = false;  // store if player has match
-var lock_board = false;  // prevent more clicks during match check
 
 
 // Button Click Event
 $("#board").find("button").bind('click', function(e) {
-
-  // don't allow clicks if pair is flipped
-  if (lock_board) return;
 
   // check if chosen array is full
   if (chosen.length < 2) {
@@ -91,7 +88,9 @@ $("#board").find("button").bind('click', function(e) {
     // add class name to chosen array
     chosen.push(this_class);
     first = this;
-    if (chosen.length == 2) lock_board = true;
+    if (chosen.length == 2) {
+      document.getElementById('cover').style.display = 'block';
+    }
 
     // check for pair
     check_pair();
@@ -117,6 +116,10 @@ $("#board").find("button").bind('click', function(e) {
 
         $(this).addClass('matched');
 
+        matches++;
+        checkWin();
+        // console.log(matches);
+
       // if no match
       } else {
         flip_sound.play();
@@ -128,8 +131,10 @@ $("#board").find("button").bind('click', function(e) {
       chosen.splice(index, 1);
       first = null;
 
-      // unlock board
-      if (chosen.length == 0) lock_board = false;
+      // uncover board
+      if (chosen.length == 0) {
+        document.getElementById('cover').style.display = 'none';
+      }
 
     }).fadeTo('fast', 1);
   }
@@ -144,6 +149,13 @@ function check_pair() {
     has_match = true;
   } else {
     has_match = false;
+  }
+}
+
+function checkWin() {
+  if (matches == 16) {
+    console.log('won game');
+    // reset game
   }
 }
 
