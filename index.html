@@ -5,6 +5,12 @@
     <title>Memory Game</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Social Media Card -->
+		<meta name="title" property="og:title" content="Memory Game" />
+		<meta name="image" property="og:image" content="/img/title-card.png" />
+		<meta name="description" property="og:description" content="A mobile-responsive memory game." />
+		<meta name="author" content="Tyler Wittig" />
+		<!--  -->
     <link rel="icon" href="img/check.png" />
     <link rel="stylesheet" type="text/css" href="main.css?v=1.2" />
     <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
@@ -29,7 +35,7 @@
       <h2>Loading...</h2>
     </div>
     <script>
-      window.onload = function(e) {
+      window.onload = function() {
         setTimeout(function() {
           document.getElementById('loading').style.opacity = "0";
         }, 1000);
